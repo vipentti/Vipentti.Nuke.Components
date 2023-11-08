@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7E514531-0087-476E-90AB-756DFE3D0296}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vipentti.Nuke.Components", "src\Vipentti.Nuke.Components\Vipentti.Nuke.Components.csproj", "{08630D07-2336-4488-AAAD-2BFDA9F0D240}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{65759B49-B8C0-440C-8333-17DCA56F494E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65759B49-B8C0-440C-8333-17DCA56F494E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65759B49-B8C0-440C-8333-17DCA56F494E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08630D07-2336-4488-AAAD-2BFDA9F0D240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08630D07-2336-4488-AAAD-2BFDA9F0D240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08630D07-2336-4488-AAAD-2BFDA9F0D240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08630D07-2336-4488-AAAD-2BFDA9F0D240}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{08630D07-2336-4488-AAAD-2BFDA9F0D240} = {7E514531-0087-476E-90AB-756DFE3D0296}
+	EndGlobalSection
+EndGlobal

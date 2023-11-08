@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>11.0</LangVersion>
+    <Nullable>enable</Nullable>
+
+    <AssemblyName>Vipentti.Nuke.Components</AssemblyName>
+    <RootNamespace>Vipentti.Nuke.Components</RootNamespace>
+
+    <IsPackable>true</IsPackable>
+    <IsPublishable>true</IsPublishable>
+
+    <PackageTags>build;automation;continuous-integration;tools;orchestration</PackageTags>
+    <Description>Provides additional Build Components to be used with NUKE build</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nuke.Common" Version="7.0.6" />
+    <PackageReference Include="Nuke.Components" Version="7.0.6" />
+  </ItemGroup>
+</Project>
