@@ -28,7 +28,6 @@ public interface IFinalizeRelease : IFinishChangelog
         .DependsOn(FinishChangelog)
         .Requires(() => GitHasCleanWorkingCopy())
         .Requires(() => Versioning)
-        .Requires(() => MainReleaseBranch)
         .Requires(() => GitRemoteName)
         .Executes(() =>
         {
