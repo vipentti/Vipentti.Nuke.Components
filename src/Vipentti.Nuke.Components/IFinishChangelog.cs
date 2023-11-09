@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using Nuke.Common;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
-using Nuke.Common.Tooling;
 using Nuke.Components;
 using static Nuke.Common.ChangeLog.ChangelogTasks;
 using static Nuke.Common.IO.FileSystemTasks;
@@ -15,8 +14,6 @@ namespace Vipentti.Nuke.Components;
 [PublicAPI]
 public interface IFinishChangelog : IHazChangelog, IHazGitRepository, IHazGitVersion
 {
-    Tool VsCode => ToolResolver.GetEnvironmentOrPathTool("code");
-
     // csharpier-ignore
     Target FinishChangelog => _ => _
         .Requires(() => GitRepository.IsOnMainOrMasterBranch() && GitHasCleanWorkingCopy())
@@ -40,14 +37,15 @@ public interface IFinishChangelog : IHazChangelog, IHazGitRepository, IHazGitVer
                     exitHandler: FinalizeReleaseUtils.NoopExit
                 );
 
-                Serilog.Log.Information("Do you want to view the diff in VsCode (y/n)?");
+                Serilog.Log.Information("Do you want to view the diff using git difftool (y/n)?");
 
                 if (Console.ReadKey(intercept: true).KeyChar == 'y')
                 {
-                    VsCode(
-                        arguments: $"--wait --diff {changelogFile} {tempFile}",
+                    Git(
+                        $"difftool --no-prompt --no-index {changelogFile} {tempFile}",
                         logOutput: true,
-                        logInvocation: true
+                        logInvocation: true,
+                        exitHandler: FinalizeReleaseUtils.NoopExit
                     );
                 }
 
