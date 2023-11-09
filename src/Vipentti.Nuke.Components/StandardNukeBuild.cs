@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using Nuke.Common;
+using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
@@ -12,6 +13,7 @@ using Nuke.Components;
 
 namespace Vipentti.Nuke.Components;
 
+[DisableDefaultOutputForHost<Terminal>(DefaultOutput.Logo)]
 public abstract class StandardNukeBuild : NukeBuild, IUseStandardReleaseProcess
 {
     public abstract string OriginalRepositoryName { get; }
