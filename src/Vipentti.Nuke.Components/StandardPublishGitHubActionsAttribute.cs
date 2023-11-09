@@ -62,6 +62,7 @@ public class StandardPublishGitHubActionsAttribute : ExtendedGitHubActionsAttrib
         PublishArtifacts = true;
         PublishCondition = DefaultPublishCondition;
         EmptyWorkflowTrigger = true;
+        EnableGitHubToken = true;
         FetchDepth = 0;
     }
 

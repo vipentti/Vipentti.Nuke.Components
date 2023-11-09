@@ -14,7 +14,10 @@ using Nuke.Components;
 namespace Vipentti.Nuke.Components;
 
 [DisableDefaultOutputForHost<Terminal>(DefaultOutput.Logo)]
-public abstract class StandardNukeBuild : NukeBuild, IUseStandardReleaseProcess
+public abstract class StandardNukeBuild
+    : NukeBuild,
+        IUseStandardReleaseProcess,
+        ICreateGitHubRelease
 {
     public abstract string OriginalRepositoryName { get; }
     public abstract string MainReleaseBranch { get; }
@@ -33,6 +36,18 @@ public abstract class StandardNukeBuild : NukeBuild, IUseStandardReleaseProcess
 
     public IEnumerable<AbsolutePath> NuGetPackages =>
         From<IPack>().PackagesDirectory.GlobFiles("*.nupkg");
+
+    string ICreateGitHubRelease.Name => MajorMinorPatchVersion;
+
+    IEnumerable<AbsolutePath> ICreateGitHubRelease.AssetFiles => NuGetPackages;
+
+    Target ICreateGitHubRelease.CreateGitHubRelease =>
+        _ =>
+            _.Inherit<ICreateGitHubRelease>()
+                .TriggeredBy<IPublish>(x => x.Publish)
+                .ProceedAfterFailure()
+                .OnlyWhenDynamic(() => From<IPublishPackagesToNuGet>().ShouldPublishToNuGet)
+                .OnlyWhenStatic(() => CurrentRepository.IsOnMainOrMasterBranch());
 
     protected override void OnBuildInitialized()
     {

@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 - Remove GitHub release debugging
+- Enable GitHub releases by default in StandardNukeBuild
 
 ## [0.2.3] / 2023-11-09
 - Enable default write permissions in StandardPublishGitHubActions
