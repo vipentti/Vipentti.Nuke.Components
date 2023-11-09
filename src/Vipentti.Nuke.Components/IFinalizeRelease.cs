@@ -26,14 +26,14 @@ public interface IFinalizeRelease : IFinishChangelog
     // csharpier-ignore
     public Target FinalizeRelease => _ => _
         .DependsOn(FinishChangelog)
-        .Requires(() => GitHasCleanWorkingCopy())
+        .Requires(() => GitHasCleanWorkingCopy() && GitRepository.IsOnMainOrMasterBranch())
         .Requires(() => Versioning)
         .Requires(() => GitRemoteName)
         .Executes(() =>
         {
             var MajorMinorPatchVersion = Versioning.MajorMinorPatch;
             Serilog.Log.Information("Using remote = {Remote}", GitRemoteName);
-            Git($"tag {MajorMinorPatchVersion}");
+            Git($"tag -a {MajorMinorPatchVersion} -m \"Release {MajorMinorPatchVersion}\"");
             Git($"push {GitRemoteName} {MainReleaseBranch} {MajorMinorPatchVersion}");
         })
         .WhenSkipped(DependencyBehavior.Skip);
