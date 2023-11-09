@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
+using Nuke.Common.Tools.GitHub;
 using Nuke.Components;
 using Vipentti.Nuke.Components;
 using static Vipentti.Nuke.Components.StandardNames;
@@ -34,7 +36,7 @@ namespace build;
     , OnPushBranches = new[] { MainBranch }
     , EnableGitHubToken = true
 )]
-class Build : StandardNukeBuild, IUseCsharpier, ICreateGitHubRelease
+class Build : StandardNukeBuild, IUseCsharpier, ICreateGitHubReleaseDebug
 {
     public override string OriginalRepositoryName { get; } = "Vipentti.Nuke.Components";
     public override string MainReleaseBranch { get; } = MainBranch;
@@ -51,8 +53,8 @@ class Build : StandardNukeBuild, IUseCsharpier, ICreateGitHubRelease
 
     string ICreateGitHubRelease.Name => MajorMinorPatchVersion;
     IEnumerable<AbsolutePath> ICreateGitHubRelease.AssetFiles => NuGetPackages;
-    Target ICreateGitHubRelease.CreateGitHubRelease => _ => _
-        .Inherit<ICreateGitHubRelease>()
+    Target ICreateGitHubReleaseDebug.CreateGitHubRelease => _ => _
+        .Inherit<ICreateGitHubReleaseDebug>()
         .TriggeredBy<IPublish>(x => x.Publish)
         .ProceedAfterFailure()
         .OnlyWhenDynamic(() => From<IPublishPackagesToNuGet>().ShouldPublishToNuGet)
