@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 - Provide some common properties in StandardNukeBuild
+- When using ICreateGitHubRelease do not create tag manually in IFinalizeRelease
 
 ## [0.2.0] / 2023-11-09
 - Remove VsCode as dependency in IFinishChangelog

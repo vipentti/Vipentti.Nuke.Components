@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using Nuke.Common;
 using Nuke.Common.Git;
+using Nuke.Components;
 using static Nuke.Common.Tools.Git.GitTasks;
 
 namespace Vipentti.Nuke.Components;
@@ -33,8 +34,16 @@ public interface IFinalizeRelease : IFinishChangelog
         {
             var MajorMinorPatchVersion = Versioning.MajorMinorPatch;
             Serilog.Log.Information("Using remote = {Remote}", GitRemoteName);
-            Git($"tag -a {MajorMinorPatchVersion} -m \"Release {MajorMinorPatchVersion}\"");
-            Git($"push {GitRemoteName} {MainReleaseBranch} {MajorMinorPatchVersion}");
+            if (this is ICreateGitHubRelease release)
+            {
+                Serilog.Log.Information("Using GitHubRelease {Release}", release.Name);
+                Git($"push {GitRemoteName} {MainReleaseBranch}");
+            }
+            else
+            {
+                Git($"tag -a {MajorMinorPatchVersion} -m \"Release {MajorMinorPatchVersion}\"");
+                Git($"push {GitRemoteName} {MainReleaseBranch} {MajorMinorPatchVersion}");
+            }
         })
         .WhenSkipped(DependencyBehavior.Skip);
 }
