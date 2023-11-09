@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Copyright 2023 Ville Penttinen
+// Distributed under the MIT License.
+// https://github.com/vipentti/Vipentti.Nuke.Components/blob/main/LICENSE.md
+
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;

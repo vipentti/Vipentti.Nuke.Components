@@ -1,4 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿// Copyright 2023 Ville Penttinen
+// Distributed under the MIT License.
+// https://github.com/vipentti/Vipentti.Nuke.Components/blob/main/LICENSE.md
+
+using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using Nuke.Common;
 using Nuke.Common.Git;

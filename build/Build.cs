@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿// Copyright 2023 Ville Penttinen
+// Distributed under the MIT License.
+// https://github.com/vipentti/Vipentti.Nuke.Components/blob/main/LICENSE.md
+
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
-using Nuke.Common.Tools.GitHub;
 using Nuke.Components;
 using Vipentti.Nuke.Components;
 using static Vipentti.Nuke.Components.StandardNames;
