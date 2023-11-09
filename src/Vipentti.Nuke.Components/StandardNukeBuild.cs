@@ -21,6 +21,7 @@ public abstract class StandardNukeBuild : NukeBuild, IUseStandardReleaseProcess
     public abstract IEnumerable<Project> ProjectsToPack { get; }
     public abstract IEnumerable<IProvideLinter> Linters { get; }
     public abstract IEnumerable<Project> TestProjects { get; }
+    public abstract bool SignReleaseTags { get; }
 
     public GitVersion GitVersion => From<IHazGitVersion>().Versioning;
 

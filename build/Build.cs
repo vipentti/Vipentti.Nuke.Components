@@ -62,6 +62,8 @@ class Build : StandardNukeBuild, IUseCsharpier, ICreateGitHubReleaseDebug
         .OnlyWhenDynamic(() => From<IPublishPackagesToNuGet>().ShouldPublishToNuGet)
         .OnlyWhenStatic(() => CurrentRepository.IsOnMainOrMasterBranch());
 
+    public override bool SignReleaseTags { get; } = true;
+
     // Support plugins are available for:
     //   - JetBrains ReSharper        https://nuke.build/resharper
     //   - JetBrains Rider            https://nuke.build/rider

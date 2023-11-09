@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 - Enable default write permissions in StandardPublishGitHubActions
 - Add DisableDefaultOutputForHostAttribute
+- Add support for signing release tags
 
 ## [0.2.2] / 2023-11-09
 - Revert changes: When using ICreateGitHubRelease do not create tag manually in IFinalizeRelease

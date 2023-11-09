@@ -17,6 +17,8 @@ public interface IFinalizeRelease : IFinishChangelog
 
     public string MainReleaseBranch { get; }
 
+    public bool SignReleaseTags { get; }
+
     public sealed string CommitMessage =>
         FinalizeReleaseUtils.GetCommitMessage(GitRepository.Commit);
 
@@ -37,7 +39,17 @@ public interface IFinalizeRelease : IFinishChangelog
         {
             var MajorMinorPatchVersion = Versioning.MajorMinorPatch;
             Serilog.Log.Information("Using remote = {Remote}", GitRemoteName);
-            Git($"tag -a {MajorMinorPatchVersion} -m \"Release {MajorMinorPatchVersion}\"");
+
+            if (SignReleaseTags)
+            {
+                Git($"tag -s {MajorMinorPatchVersion} -m \"Release {MajorMinorPatchVersion}\"");
+                Git($"tag -v {MajorMinorPatchVersion}");
+            }
+            else
+            {
+                Git($"tag -a {MajorMinorPatchVersion} -m \"Release {MajorMinorPatchVersion}\"");
+            }
+
             Git($"push {GitRemoteName} {MainReleaseBranch} {MajorMinorPatchVersion}");
         })
         .WhenSkipped(DependencyBehavior.Skip);
