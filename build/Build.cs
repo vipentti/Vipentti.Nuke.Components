@@ -38,7 +38,7 @@ namespace build;
     , OnPushBranches = new[] { MainBranch }
     , EnableGitHubToken = true
 )]
-class Build : StandardNukeBuild, IUseCsharpier, ICreateGitHubReleaseDebug
+class Build : StandardNukeBuild, IUseCsharpier, ICreateGitHubRelease
 {
     public override string OriginalRepositoryName { get; } = "Vipentti.Nuke.Components";
     public override string MainReleaseBranch { get; } = MainBranch;
@@ -55,8 +55,8 @@ class Build : StandardNukeBuild, IUseCsharpier, ICreateGitHubReleaseDebug
 
     string ICreateGitHubRelease.Name => MajorMinorPatchVersion;
     IEnumerable<AbsolutePath> ICreateGitHubRelease.AssetFiles => NuGetPackages;
-    Target ICreateGitHubReleaseDebug.CreateGitHubRelease => _ => _
-        .Inherit<ICreateGitHubReleaseDebug>()
+    Target ICreateGitHubRelease.CreateGitHubRelease => _ => _
+        .Inherit<ICreateGitHubRelease>()
         .TriggeredBy<IPublish>(x => x.Publish)
         .ProceedAfterFailure()
         .OnlyWhenDynamic(() => From<IPublishPackagesToNuGet>().ShouldPublishToNuGet)
