@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using Nuke.Common;
+using Nuke.Common.Git;
+using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
+using Nuke.Common.Tools.GitVersion;
 using Nuke.Components;
 
 namespace Vipentti.Nuke.Components;
@@ -13,9 +16,20 @@ public abstract class StandardNukeBuild : NukeBuild, IUseStandardReleaseProcess
     public abstract IEnumerable<IProvideLinter> Linters { get; }
     public abstract IEnumerable<Project> TestProjects { get; }
 
+    public GitVersion GitVersion => From<IHazGitVersion>().Versioning;
+
+    public string MajorMinorPatchVersion => GitVersion.MajorMinorPatch;
+
+    public GitRepository CurrentRepository => From<IHazGitRepository>().GitRepository;
+
+    public Solution CurrentSolution => From<IHazSolution>().Solution;
+
+    public IEnumerable<AbsolutePath> NuGetPackages =>
+        From<IPack>().PackagesDirectory.GlobFiles("*.nupkg");
+
     protected override void OnBuildInitialized()
     {
-        var version = From<IHazGitVersion>().Versioning.InformationalVersion;
+        var version = GitVersion.InformationalVersion;
 
         Serilog.Log.Information("BUILD SETUP");
         Serilog

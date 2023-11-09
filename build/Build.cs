@@ -39,7 +39,7 @@ class Build : StandardNukeBuild, IUseCsharpier, ICreateGitHubRelease
     public override string OriginalRepositoryName { get; } = "Vipentti.Nuke.Components";
     public override string MainReleaseBranch { get; } = MainBranch;
     public override IEnumerable<Project> ProjectsToPack =>
-        From<IHazSolution>().Solution.GetAllProjects("Vipentti.Nuke.Components");
+        CurrentSolution.GetAllProjects("Vipentti.Nuke.Components");
     public override IEnumerable<IProvideLinter> Linters => new[]
     {
         From<IUseDotNetFormat>().Linter,
@@ -49,14 +49,14 @@ class Build : StandardNukeBuild, IUseCsharpier, ICreateGitHubRelease
 
     public override IEnumerable<Project> TestProjects { get; } = Enumerable.Empty<Project>();
 
-    string ICreateGitHubRelease.Name => From<IHazGitVersion>().Versioning.MajorMinorPatch;
-    IEnumerable<AbsolutePath> ICreateGitHubRelease.AssetFiles => From<IPack>().PackagesDirectory.GlobFiles("*.nupkg");
+    string ICreateGitHubRelease.Name => MajorMinorPatchVersion;
+    IEnumerable<AbsolutePath> ICreateGitHubRelease.AssetFiles => NuGetPackages;
     Target ICreateGitHubRelease.CreateGitHubRelease => _ => _
         .Inherit<ICreateGitHubRelease>()
         .TriggeredBy<IPublish>(x => x.Publish)
         .ProceedAfterFailure()
         .OnlyWhenDynamic(() => From<IPublishPackagesToNuGet>().ShouldPublishToNuGet)
-        .OnlyWhenStatic(() => From<IHazGitRepository>().GitRepository.IsOnMainOrMasterBranch());
+        .OnlyWhenStatic(() => CurrentRepository.IsOnMainOrMasterBranch());
 
     // Support plugins are available for:
     //   - JetBrains ReSharper        https://nuke.build/resharper
