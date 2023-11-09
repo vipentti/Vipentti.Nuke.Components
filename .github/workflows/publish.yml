@@ -41,6 +41,7 @@ jobs:
         run: ./build.cmd Test InstallLinters Lint Pack ValidatePackages Publish
         env:
           NuGetApiKey: ${{ secrets.NUGET_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PackageOwner: ${{ vars.PACKAGE_OWNER }}
           NuGetSource: ${{ vars.NUGET_SOURCE }}
   ubuntu-latest:
@@ -61,6 +62,7 @@ jobs:
         run: ./build.cmd Test InstallLinters Lint Pack ValidatePackages Publish
         env:
           NuGetApiKey: ${{ secrets.NUGET_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PackageOwner: ${{ vars.PACKAGE_OWNER }}
           NuGetSource: ${{ vars.NUGET_SOURCE }}
   macos-latest:
@@ -81,5 +83,6 @@ jobs:
         run: ./build.cmd Test InstallLinters Lint Pack ValidatePackages Publish
         env:
           NuGetApiKey: ${{ secrets.NUGET_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PackageOwner: ${{ vars.PACKAGE_OWNER }}
           NuGetSource: ${{ vars.NUGET_SOURCE }}
