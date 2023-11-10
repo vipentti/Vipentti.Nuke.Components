@@ -24,7 +24,8 @@ public interface IPublishPackagesToNuGet : IPublish, IFinalizeRelease, IValidate
         GitRepository.IsOnMainOrMasterBranch()
         && IsOriginalRepository
         && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-        && IsFinalizeCommit;
+        && IsFinalizeCommit
+        && IsTaggedBuild;
 
     sealed bool IsOriginalRepository =>
         GitRepository.Identifier == $"{PackageOwner}/{OriginalRepositoryName}";

@@ -18,10 +18,10 @@ public static class FinalizeReleaseUtils
         new(@"Finalize CHANGELOG\.md for \d+\.\d+\.\d+", RegexOptions.Compiled);
     public static readonly Regex TaggedBuildRegex = new(@"\d+\.\d+\.\d+", RegexOptions.Compiled);
 
-    public static string? TagVersion(IEnumerable<string> tags) =>
+    public static string? GetTagVersion(IEnumerable<string> tags) =>
         tags.SingleOrDefault(TaggedBuildRegex.IsMatch);
 
-    public static bool IsFinalizeCommit(string commitHash)
+    public static bool GetIsFinalizeCommit(string commitHash)
     {
         var message = GetCommitMessage(commitHash);
         return FinalizeChangeLogRegex.IsMatch(message);
@@ -35,6 +35,35 @@ public static class FinalizeReleaseUtils
             logInvocation: false,
             exitHandler: NoopExit
         );
+        return output.StdToText() ?? "";
+    }
+
+    public static IEnumerable<string> GetTagsPointingAtCommit(string hash)
+    {
+        var output = Git(
+            $"tag --points-at {hash}",
+            logOutput: false,
+            logInvocation: false,
+            exitHandler: NoopExit
+        );
+
+        var stdout = output.StdToText() ?? "";
+
+        return stdout.Split(
+            Environment.NewLine,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
+        );
+    }
+
+    public static string GetCommitHashForTag(string tag)
+    {
+        var output = Git(
+            $"rev-list -1 {tag}",
+            logOutput: false,
+            logInvocation: false,
+            exitHandler: NoopExit
+        );
+
         return output.StdToText() ?? "";
     }
 }

@@ -6,6 +6,7 @@ using JetBrains.Annotations;
 using Nuke.Common;
 using Nuke.Common.Git;
 using static Nuke.Common.Tools.Git.GitTasks;
+using static Vipentti.Nuke.Components.FinalizeReleaseUtils;
 
 namespace Vipentti.Nuke.Components;
 
@@ -19,13 +20,12 @@ public interface IFinalizeRelease : IFinishChangelog
 
     public bool SignReleaseTags { get; }
 
-    public sealed string CommitMessage =>
-        FinalizeReleaseUtils.GetCommitMessage(GitRepository.Commit);
+    public sealed string CommitMessage => GetCommitMessage(GitRepository.Commit);
 
-    public sealed bool IsFinalizeCommit =>
-        FinalizeReleaseUtils.IsFinalizeCommit(GitRepository.Commit);
+    public sealed bool IsFinalizeCommit => GetIsFinalizeCommit(GitRepository.Commit);
 
-    public sealed string? TagVersion => FinalizeReleaseUtils.TagVersion(GitRepository.Tags);
+    public sealed string? TagVersion =>
+        GetTagVersion(GetTagsPointingAtCommit(GitRepository.Commit));
 
     public sealed bool IsTaggedBuild => !string.IsNullOrWhiteSpace(TagVersion);
 
