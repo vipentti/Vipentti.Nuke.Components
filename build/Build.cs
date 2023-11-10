@@ -3,7 +3,6 @@
 // https://github.com/vipentti/Vipentti.Nuke.Components/blob/main/LICENSE.md
 
 using System.Collections.Generic;
-using System.Linq;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.ProjectModel;
 using Nuke.Components;
@@ -47,7 +46,7 @@ class Build : StandardNukeBuild, IUseCsharpier
     };
     bool IUseCsharpier.UseGlobalTool { get; } = true;
 
-    public override IEnumerable<Project> TestProjects { get; } = Enumerable.Empty<Project>();
+    public override IEnumerable<Project> TestProjects => CurrentSolution.GetAllProjects("*Tests*");
 
     public override bool SignReleaseTags { get; } = true;
 

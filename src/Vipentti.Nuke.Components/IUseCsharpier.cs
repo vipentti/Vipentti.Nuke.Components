@@ -21,10 +21,7 @@ public interface IUseCsharpier : INukeBuild
 
     // csharpier-ignore
     Target CheckCsharpier => _ => _
-        .Executes(() =>
-        {
-            RunCsharpier(check: true);
-        });
+        .Executes(() => RunCsharpier(check: true));
 
     // csharpier-ignore
     Target InstallCsharpier => _ => _
@@ -35,10 +32,7 @@ public interface IUseCsharpier : INukeBuild
     Target FormatCsharpier => _ => _
         .TryBefore<IUseDotNetFormat>(x => x.Format)
         .TryDependentFor<IUseDotNetFormat>(x => x.Format)
-        .Executes(() =>
-        {
-            RunCsharpier(check: false);
-        });
+        .Executes(() => RunCsharpier(check: false));
 
     sealed IProvideLinter Linter =>
         new LinterDelegate(ExecuteInstallGlobalCsharpier, () => RunCsharpier(check: true));

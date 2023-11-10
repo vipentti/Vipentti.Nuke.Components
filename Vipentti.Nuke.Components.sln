@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vipentti.Nuke.Components", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{65759B49-B8C0-440C-8333-17DCA56F494E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F1D5E179-83EC-4C5C-AE74-27EFC7C301D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleTests", "tests\ExampleTests\ExampleTests.csproj", "{4E0A92C6-1C10-4BF9-82CD-8FF0CA1549F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,8 +28,13 @@ Global
 		{08630D07-2336-4488-AAAD-2BFDA9F0D240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08630D07-2336-4488-AAAD-2BFDA9F0D240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08630D07-2336-4488-AAAD-2BFDA9F0D240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E0A92C6-1C10-4BF9-82CD-8FF0CA1549F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0A92C6-1C10-4BF9-82CD-8FF0CA1549F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0A92C6-1C10-4BF9-82CD-8FF0CA1549F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0A92C6-1C10-4BF9-82CD-8FF0CA1549F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{08630D07-2336-4488-AAAD-2BFDA9F0D240} = {7E514531-0087-476E-90AB-756DFE3D0296}
+		{4E0A92C6-1C10-4BF9-82CD-8FF0CA1549F6} = {F1D5E179-83EC-4C5C-AE74-27EFC7C301D9}
 	EndGlobalSection
 EndGlobal
