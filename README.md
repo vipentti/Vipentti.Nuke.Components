@@ -12,4 +12,4 @@ dotnet add package Vipentti.Nuke.Components
 
 ## License
 
-Vipentti.Nuke.Components is licensed under the [MIT License](./LICENSE.md)
+Vipentti.Nuke.Components is licensed under the [MIT License](https://github.com/vipentti/Vipentti.Nuke.Components/blob/main/LICENSE.md)
