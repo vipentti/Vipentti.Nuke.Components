@@ -4,10 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
-using Nuke.Common.Git;
-using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Components;
 using Vipentti.Nuke.Components;
@@ -36,7 +33,6 @@ namespace build;
     GitHubActionsImage.UbuntuLatest,
     GitHubActionsImage.MacOsLatest
     , OnPushBranches = new[] { MainBranch }
-    , EnableGitHubToken = true
 )]
 class Build : StandardNukeBuild, IUseCsharpier
 {

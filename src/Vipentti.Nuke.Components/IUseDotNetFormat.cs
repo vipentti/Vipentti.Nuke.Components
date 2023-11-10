@@ -16,6 +16,9 @@ public interface IUseDotNetFormat : INukeBuild
 {
     // csharpier-ignore
     Target Format => _ => _
+        .TryBefore<IRestore>(x => x.Restore)
+        .TryBefore<ICompile>(x => x.Compile)
+        .TryBefore<IUseLinters>(x => x.Lint)
         .Executes(() =>
         {
             DotNetFormat(_ => _

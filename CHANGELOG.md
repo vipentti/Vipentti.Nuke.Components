@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- Improve ordering of Format target dependencies
 
 ## [0.3.0] / 2023-11-09
 - Remove GitHub release debugging
