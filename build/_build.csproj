@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace></RootNamespace>
     <LangVersion>11.0</LangVersion>
     <Nullable>enable</Nullable>
@@ -11,6 +11,8 @@
     <NukeScriptDirectory>..</NukeScriptDirectory>
     <NukeTelemetryVersion>1</NukeTelemetryVersion>
     <IsPackable>false</IsPackable>
+    <!-- TODO: Remove me once Nuke is updated to support .NET 8-->
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
   </PropertyGroup>
 
   <ItemGroup>
