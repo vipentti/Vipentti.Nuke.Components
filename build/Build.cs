@@ -11,7 +11,7 @@ using static Vipentti.Nuke.Components.StandardNames;
 
 namespace build;
 
-[GitHubActions(
+[ExtendedGitHubActions(
     "pull-request",
     GitHubActionsImage.WindowsLatest,
     GitHubActionsImage.UbuntuLatest,
@@ -19,6 +19,11 @@ namespace build;
     OnPullRequestBranches = new[] { MainBranch, DevelopBranch },
     PublishArtifacts = false,
     FetchDepth = 0, // fetch full history
+    SetupDotnetVersions = new[]
+    {
+        "6.x",
+        "8.x",
+    },
     InvokedTargets = new[]
     {
         nameof(ITest.Test),
@@ -32,6 +37,11 @@ namespace build;
     GitHubActionsImage.UbuntuLatest,
     GitHubActionsImage.MacOsLatest
     , OnPushBranches = new[] { MainBranch }
+    , SetupDotnetVersions = new[]
+    {
+        "6.x",
+        "8.x",
+    }
 )]
 class Build : StandardNukeBuild, IUseCsharpier
 {

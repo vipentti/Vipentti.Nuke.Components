@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 - Add .NET 8 as a target framework option
+- Implement support for installing specific .NET SDKS in GitHub actions
 
 ## [0.3.4] / 2023-11-10
 - Fix links in README
