@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net6.0</TargetFrameworks>
     <LangVersion>12.0</LangVersion>
     <Nullable>enable</Nullable>
 
@@ -10,6 +10,9 @@
 
     <IsPackable>true</IsPackable>
     <IsPublishable>true</IsPublishable>
+
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>true</AppendRuntimeIdentifierToOutputPath>
 
     <PackageTags>build;automation;continuous-integration;tools;orchestration</PackageTags>
     <Description>Provides additional Build Components to be used with NUKE build</Description>

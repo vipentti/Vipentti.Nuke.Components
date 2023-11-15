@@ -42,15 +42,18 @@ public class ExtendedGitHubActionsAttribute : GitHubActionsAttribute
             $"${{{{ vars.{variable.SplitCamelHumpsWithKnownWords().JoinUnderscore().ToUpperInvariant()} }}}}";
     }
 
-    protected override GitHubActionsJob GetJobs(GitHubActionsImage image, IReadOnlyCollection<ExecutableTarget> relevantTargets)
+    protected override GitHubActionsJob GetJobs(
+        GitHubActionsImage image,
+        IReadOnlyCollection<ExecutableTarget> relevantTargets
+    )
     {
         var job = base.GetJobs(image, relevantTargets);
 
         if (SetupDotnetVersions.Length > 0)
         {
             var versionStep = new SetupDotnetVersionsStep(SetupDotnetVersions);
-
-            job.Steps = [job.Steps[0], versionStep, ..job.Steps[1..]];
+            // csharpier-ignore
+            job.Steps = [job.Steps[0], versionStep, .. job.Steps[1..]];
         }
 
         return job;
