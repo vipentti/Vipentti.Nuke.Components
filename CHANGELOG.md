@@ -6,8 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 - BREAKING: Renamed IUseDotNetFormat targets and properties
+- BREAKING: Enable formatters and local tools by default in StandardNukeBuild
 - Added IUseFormatters component
-- Changed Enable formatters and local tools by default in StandardNukeBuild
 - Updated Nuke.* packages to 8.x
 
 ## [0.4.0] / 2023-11-15
