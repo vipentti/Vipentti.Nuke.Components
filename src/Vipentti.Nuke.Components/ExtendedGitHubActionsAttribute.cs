@@ -52,7 +52,6 @@ public class ExtendedGitHubActionsAttribute : GitHubActionsAttribute
         if (SetupDotnetVersions.Length > 0)
         {
             var versionStep = new SetupDotnetVersionsStep(SetupDotnetVersions);
-            // csharpier-ignore
             job.Steps = [job.Steps[0], versionStep, .. job.Steps[1..]];
         }
 
