@@ -18,6 +18,8 @@ public interface IUseStandardReleaseProcess
         IValidatePackages,
         IUseDotNetFormat,
         IUseLinters,
+        IUseFormatters,
+        IUseLocalDotNetTools,
         ITestWithMultipleFrameworks
 // csharpier-ignore
 { }

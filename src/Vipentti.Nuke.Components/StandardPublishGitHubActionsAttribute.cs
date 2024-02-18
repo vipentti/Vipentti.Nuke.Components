@@ -25,6 +25,7 @@ public class StandardPublishGitHubActionsAttribute : ExtendedGitHubActionsAttrib
 
     public static readonly string[] DefaultInvokedTargets = new[]
     {
+        nameof(IUseLocalDotNetTools.RestoreLocalTools),
         nameof(ITest.Test),
         nameof(IUseLinters.InstallLinters),
         nameof(IUseLinters.Lint),

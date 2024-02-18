@@ -7,6 +7,7 @@ using Nuke.Common;
 using Nuke.Common.IO;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
+using Nuke.Components;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 namespace Vipentti.Nuke.Components;
@@ -21,7 +22,8 @@ public interface IUseLocalDotNetTools : INukeBuild
     // csharpier-ignore
     Target RestoreLocalTools => _ => _
         .OnlyWhenDynamic(() => HasToolsManifest)
-        .Executes(() => DotNetToolRestore());
+        .TryDependentFor<IRestore>(x => x.Restore)
+        .Executes(() => DotNetToolRestore(_ => _.Apply(ToolRestoreSettingsBase)));
 
     // csharpier-ignore
     sealed Configure<DotNetToolRestoreSettings> ToolRestoreSettingsBase => _ => _
