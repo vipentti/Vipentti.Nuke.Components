@@ -27,5 +27,5 @@ public interface IUseLocalDotNetTools : INukeBuild
 
     // csharpier-ignore
     sealed Configure<DotNetToolRestoreSettings> ToolRestoreSettingsBase => _ => _
-        .SetConfigFile(ToolsManifestPath);
+        .SetToolManifest(ToolsManifestPath);
 }
