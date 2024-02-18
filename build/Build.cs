@@ -16,32 +16,32 @@ namespace build;
     GitHubActionsImage.WindowsLatest,
     GitHubActionsImage.UbuntuLatest,
     GitHubActionsImage.MacOsLatest,
-    OnPullRequestBranches = new[] { MainBranch, DevelopBranch },
+    OnPullRequestBranches = [MainBranch, DevelopBranch],
     PublishArtifacts = false,
     FetchDepth = 0, // fetch full history
-    SetupDotnetVersions = new[]
-    {
+    SetupDotnetVersions =
+    [
         "6.x",
         "8.x",
-    },
-    InvokedTargets = new[]
-    {
+    ],
+    InvokedTargets =
+    [
         nameof(ITest.Test),
         nameof(IUseLinters.InstallLinters),
         nameof(IUseLinters.Lint),
         nameof(IValidatePackages.ValidatePackages),
-    })]
+    ])]
 [StandardPublishGitHubActions(
     "publish",
     GitHubActionsImage.WindowsLatest,
     GitHubActionsImage.UbuntuLatest,
     GitHubActionsImage.MacOsLatest
-    , OnPushBranches = new[] { MainBranch }
-    , SetupDotnetVersions = new[]
-    {
+    , OnPushBranches = [MainBranch]
+    , SetupDotnetVersions =
+    [
         "6.x",
         "8.x",
-    }
+    ]
 )]
 class Build : StandardNukeBuild, IUseCsharpier
 {
@@ -49,17 +49,17 @@ class Build : StandardNukeBuild, IUseCsharpier
     public override string MainReleaseBranch { get; } = MainBranch;
     public override IEnumerable<Project> ProjectsToPack =>
         CurrentSolution.GetAllProjects("Vipentti.Nuke.Components");
-    public override IEnumerable<IProvideLinter> Linters => new[]
-    {
+    public override IEnumerable<IProvideLinter> Linters =>
+    [
         From<IUseDotNetFormat>().Linter,
         From<IUseCsharpier>().Linter,
-    };
+    ];
 
-    public override IEnumerable<IProvideFormatter> Formatters => new[]
-    {
+    public override IEnumerable<IProvideFormatter> Formatters =>
+    [
         From<IUseDotNetFormat>().Formatter,
         From<IUseCsharpier>().Formatter,
-    };
+    ];
 
     bool IUseCsharpier.UseGlobalTool { get; } = false;
 
