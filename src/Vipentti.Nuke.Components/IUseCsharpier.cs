@@ -30,12 +30,15 @@ public interface IUseCsharpier : INukeBuild
 
     // csharpier-ignore
     Target FormatCsharpier => _ => _
-        .TryBefore<IUseDotNetFormat>(x => x.Format)
-        .TryDependentFor<IUseDotNetFormat>(x => x.Format)
+        .TryBefore<IUseDotNetFormat>(x => x.FormatDotNet)
+        .TryDependentFor<IUseDotNetFormat>(x => x.FormatDotNet)
         .Executes(() => RunCsharpier(check: false));
 
     sealed IProvideLinter Linter =>
         new LinterDelegate(ExecuteInstallGlobalCsharpier, () => RunCsharpier(check: true));
+
+    sealed IProvideFormatter Formatter =>
+        new FormatterDelegate(ExecuteInstallGlobalCsharpier, () => RunCsharpier(check: false));
 
     sealed void ExecuteInstallGlobalCsharpier()
     {
