@@ -3,9 +3,11 @@
 // https://github.com/vipentti/Vipentti.Nuke.Components/blob/main/LICENSE.md
 
 using System;
+using JetBrains.Annotations;
 
 namespace Vipentti.Nuke.Components;
 
+[PublicAPI]
 public class LinterDelegate : IProvideLinter
 {
     private readonly Action _install;
