@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- BREAKING: Renamed IUseDotNetFormat targets and properties
+- Added IUseFormatters component
+- Changed Enable formatters and local tools by default in StandardNukeBuild
+- Updated Nuke.* packages to 8.x
 
 ## [0.4.0] / 2023-11-15
 - Add .NET 8 as a target framework option
