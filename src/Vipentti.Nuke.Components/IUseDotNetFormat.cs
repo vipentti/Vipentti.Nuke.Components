@@ -14,39 +14,41 @@ namespace Vipentti.Nuke.Components;
 [PublicAPI]
 public interface IUseDotNetFormat : INukeBuild
 {
-    // csharpier-ignore
-    Target Format => _ => _
-        .TryBefore<IRestore>(x => x.Restore)
-        .TryBefore<ICompile>(x => x.Compile)
-        .TryBefore<IUseLinters>(x => x.Lint)
-        .Executes(() =>
-        {
-            DotNetFormat(_ => _
-                .Apply(FormatSettingsBase)
-                .Apply(FormatSettings));
-        });
-
     sealed Configure<DotNetFormatSettings> FormatSettingsBase => _ => _;
 
     Configure<DotNetFormatSettings> FormatSettings => _ => _;
 
     // csharpier-ignore
-    Target ValidateFormat => _ => _
-        .AssuredAfterFailure()
-        .TryAfter<IUseDotNetFormat>(x => x.Format)
-        .TryAfter<ITest>(x => x.Test)
-        .TryBefore<IPack>(x => x.Pack)
-        .Executes(ExecuteValidateFormat);
+    Target FormatDotNet => _ => _
+        .TryBefore<IRestore>(x => x.Restore)
+        .TryBefore<ICompile>(x => x.Compile)
+        .TryBefore<IUseLinters>(x => x.Lint)
+        .Executes(ExecuteDotNetFormat);
 
-    sealed void ExecuteValidateFormat()
+    sealed void ExecuteDotNetFormat()
     {
-        DotNetFormat(_ => _.Apply(ValidateFormatSettingsBase).Apply(ValidateFormatSettings));
+        DotNetFormat(_ => _.Apply(FormatSettingsBase).Apply(FormatSettings));
     }
 
-    sealed IProvideLinter Linter => new LinterDelegate(() => { }, ExecuteValidateFormat);
+    sealed IProvideFormatter Formatter => new FormatterDelegate(() => { }, ExecuteDotNetFormat);
 
-    sealed Configure<DotNetFormatSettings> ValidateFormatSettingsBase =>
+    // csharpier-ignore
+    Target CheckDotNetFormat => _ => _
+        .AssuredAfterFailure()
+        .TryAfter<IUseDotNetFormat>(x => x.FormatDotNet)
+        .TryAfter<ITest>(x => x.Test)
+        .TryBefore<IPack>(x => x.Pack)
+        .Executes(ExecuteCheckDotNetFormat);
+
+    sealed void ExecuteCheckDotNetFormat()
+    {
+        DotNetFormat(_ => _.Apply(CheckDotNetFormatSettingsBase).Apply(CheckDotNetFormatSettings));
+    }
+
+    sealed IProvideLinter Linter => new LinterDelegate(() => { }, ExecuteCheckDotNetFormat);
+
+    sealed Configure<DotNetFormatSettings> CheckDotNetFormatSettingsBase =>
         _ => _.SetVerifyNoChanges(true);
 
-    Configure<DotNetFormatSettings> ValidateFormatSettings => _ => _;
+    Configure<DotNetFormatSettings> CheckDotNetFormatSettings => _ => _;
 }
