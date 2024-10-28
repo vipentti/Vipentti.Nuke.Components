@@ -30,7 +30,7 @@ public interface IFinishChangelog : IHazChangelog, IHazGitRepository, IHazGitVer
             var tempFile = TemporaryDirectory / (Path.GetRandomFileName() + ".md");
             try
             {
-                CopyFile(changelogFile, tempFile);
+                changelogFile.Copy(tempFile);
 
                 FinalizeChangelog(tempFile, MajorMinorPatchVersion, GitRepository);
 
