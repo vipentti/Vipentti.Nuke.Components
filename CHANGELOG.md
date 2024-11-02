@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.5.2] / 2024-11-02
 - Update actions/setup-dotnet to v4
 
 ## [0.5.1] / 2024-10-28
@@ -55,7 +57,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.0] / 2023-11-08
 - Initial release
 
-[Unreleased]: https://github.com/vipentti/Vipentti.Nuke.Components/compare/0.5.1...HEAD
+[Unreleased]: https://github.com/vipentti/Vipentti.Nuke.Components/compare/0.5.2...HEAD
+[0.5.2]: https://github.com/vipentti/Vipentti.Nuke.Components/compare/0.5.1...0.5.2
 [0.5.1]: https://github.com/vipentti/Vipentti.Nuke.Components/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/vipentti/Vipentti.Nuke.Components/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/vipentti/Vipentti.Nuke.Components/compare/0.3.4...0.4.0
