@@ -76,7 +76,7 @@ public class ExtendedGitHubActionsAttribute : GitHubActionsAttribute
         public override void Write(CustomFileWriter writer)
         {
             writer.WriteLine("- name: Setup dotnet");
-            writer.WriteLine("  uses: actions/setup-dotnet@v3");
+            writer.WriteLine("  uses: actions/setup-dotnet@v4");
             writer.WriteLine("  with:");
             using (writer.Indent())
             using (writer.Indent())
