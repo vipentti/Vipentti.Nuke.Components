@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- Update actions/setup-dotnet to v4
 
 ## [0.5.1] / 2024-10-28
 - Update Nuke.* packages to 8.1.2
