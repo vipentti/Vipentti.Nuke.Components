@@ -72,7 +72,8 @@ public class ExtendedGitHubActionsAttribute : GitHubActionsAttribute
         }
     }
 
-    class SetupDotnetVersionsStep(string[] Versions, DotnetVersionQuality dotnetVersionQuality) : GitHubActionsStep
+    class SetupDotnetVersionsStep(string[] Versions, DotnetVersionQuality dotnetVersionQuality)
+        : GitHubActionsStep
     {
         public override void Write(CustomFileWriter writer)
         {
@@ -93,7 +94,9 @@ public class ExtendedGitHubActionsAttribute : GitHubActionsAttribute
 
                 if (dotnetVersionQuality != DotnetVersionQuality.Default)
                 {
-                    writer.WriteLine($"dotnet-quality: '{dotnetVersionQuality.ToString().ToLowerInvariant()}'");
+                    writer.WriteLine(
+                        $"dotnet-quality: '{dotnetVersionQuality.ToString().ToLowerInvariant()}'"
+                    );
                 }
             }
         }
