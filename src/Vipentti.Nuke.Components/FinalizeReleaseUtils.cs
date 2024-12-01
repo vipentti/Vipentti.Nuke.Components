@@ -11,12 +11,18 @@ using static Nuke.Common.Tools.Git.GitTasks;
 
 namespace Vipentti.Nuke.Components;
 
-public static class FinalizeReleaseUtils
+public static partial class FinalizeReleaseUtils
 {
-    public static readonly Action<IProcess> NoopExit = (_) => { };
-    public static readonly Regex FinalizeChangeLogRegex =
-        new(@"Finalize CHANGELOG\.md for \d+\.\d+\.\d+", RegexOptions.Compiled);
-    public static readonly Regex TaggedBuildRegex = new(@"\d+\.\d+\.\d+", RegexOptions.Compiled);
+    [GeneratedRegex(@"\d+\.\d+\.\d+", RegexOptions.Compiled)]
+    private static partial Regex TaggedBuildRegexHelper();
+
+    [GeneratedRegex(@"Finalize CHANGELOG\.md for \d+\.\d+\.\d+", RegexOptions.Compiled)]
+    private static partial Regex FinalizeChangeLogRegexHelper();
+
+    public static readonly Func<IProcess, object?> NoopExit = (_) => null;
+    public static readonly Regex FinalizeChangeLogRegex = FinalizeChangeLogRegexHelper();
+
+    public static readonly Regex TaggedBuildRegex = TaggedBuildRegexHelper();
 
     public static string? GetTagVersion(IEnumerable<string> tags) =>
         tags.SingleOrDefault(TaggedBuildRegex.IsMatch);

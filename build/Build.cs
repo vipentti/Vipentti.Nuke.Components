@@ -21,8 +21,8 @@ namespace build;
     FetchDepth = 0, // fetch full history
     SetupDotnetVersions =
     [
-        "6.x",
         "8.x",
+        "9.x",
     ],
     InvokedTargets =
     [
@@ -39,8 +39,8 @@ namespace build;
     , OnPushBranches = [MainBranch]
     , SetupDotnetVersions =
     [
-        "6.x",
         "8.x",
+        "9.x",
     ]
 )]
 class Build : StandardNukeBuild, IUseCsharpier
