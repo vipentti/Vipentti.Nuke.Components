@@ -2,7 +2,6 @@
 // Distributed under the MIT License.
 // https://github.com/vipentti/Vipentti.Nuke.Components/blob/main/LICENSE.md
 
-using System;
 using System.Collections.Generic;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.CI.GitHubActions.Configuration;
@@ -22,9 +21,11 @@ public class ExtendedGitHubActionsAttribute : GitHubActionsAttribute
 
     public bool EmptyWorkflowTrigger { get; set; }
 
-    public string[] ImportVars { get; set; } = Array.Empty<string>();
+    public string[] ImportVars { get; set; } = [];
 
-    public string[] SetupDotnetVersions { get; set; } = Array.Empty<string>();
+    public string[] SetupDotnetVersions { get; set; } = [];
+
+    public DotnetVersionQuality SetupDotnetQuality { get; set; } = DotnetVersionQuality.Default;
 
     protected override IEnumerable<(string Key, string Value)> GetImports()
     {
@@ -51,7 +52,7 @@ public class ExtendedGitHubActionsAttribute : GitHubActionsAttribute
 
         if (SetupDotnetVersions.Length > 0)
         {
-            var versionStep = new SetupDotnetVersionsStep(SetupDotnetVersions);
+            var versionStep = new SetupDotnetVersionsStep(SetupDotnetVersions, SetupDotnetQuality);
             job.Steps = [job.Steps[0], versionStep, .. job.Steps[1..]];
         }
 
@@ -71,7 +72,7 @@ public class ExtendedGitHubActionsAttribute : GitHubActionsAttribute
         }
     }
 
-    class SetupDotnetVersionsStep(string[] Versions) : GitHubActionsStep
+    class SetupDotnetVersionsStep(string[] Versions, DotnetVersionQuality dotnetVersionQuality) : GitHubActionsStep
     {
         public override void Write(CustomFileWriter writer)
         {
@@ -88,6 +89,11 @@ public class ExtendedGitHubActionsAttribute : GitHubActionsAttribute
                     {
                         writer.WriteLine(item);
                     }
+                }
+
+                if (dotnetVersionQuality != DotnetVersionQuality.Default)
+                {
+                    writer.WriteLine($"dotnet-quality: '{dotnetVersionQuality.ToString().ToLowerInvariant()}'");
                 }
             }
         }

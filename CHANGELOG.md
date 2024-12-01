@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 - Update Nuke.* packages to 9.0.1
 - Added .net 9.0 support
+- Added support for specifying SetupDotnetQuality in ExtendedGitHubActionsAttribute
 - BREAKING: Dropped support for net6.0
 
 ## [0.5.2] / 2024-11-02
