@@ -15,7 +15,7 @@ namespace Vipentti.Nuke.Components;
 
 public class StandardPublishGitHubActionsAttribute : ExtendedGitHubActionsAttribute
 {
-    public static readonly string[] DefaultImportSecrets = new[] { nameof(IPublish.NuGetApiKey), };
+    public static readonly string[] DefaultImportSecrets = new[] { nameof(IPublish.NuGetApiKey) };
 
     public static readonly string[] DefaultImportVars = new[]
     {

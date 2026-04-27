@@ -50,16 +50,15 @@ public interface IUseCsharpier : INukeBuild
 
     sealed void RunCsharpier(bool check)
     {
-        var toolname = UseGlobalTool ? "csharpier" : "tool run dotnet-csharpier";
+        var toolname = UseGlobalTool ? "csharpier" : "tool run csharpier";
+
+        var subCommand = check ? "check" : "format";
 
         DirectoriesToFormat.ForEach(RunFormat);
 
         void RunFormat(AbsolutePath path)
         {
-            DotNet(
-                arguments: $"{toolname} {path}" + (check ? " --check" : ""),
-                logInvocation: true
-            );
+            DotNet(arguments: toolname + $" {subCommand} {path}", logInvocation: true);
         }
     }
 }
