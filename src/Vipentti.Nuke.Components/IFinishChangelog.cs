@@ -10,7 +10,6 @@ using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Components;
 using static Nuke.Common.ChangeLog.ChangelogTasks;
-using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.Git.GitTasks;
 
 namespace Vipentti.Nuke.Components;
