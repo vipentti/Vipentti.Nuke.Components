@@ -20,7 +20,7 @@
         <IsPublishable>false</IsPublishable>
 
         <Authors>Ville Penttinen</Authors>
-        <Copyright>Copyright © 2023 Ville Penttinen</Copyright>
+        <Copyright>Copyright © 2023-2026 Ville Penttinen</Copyright>
         <PackageProjectUrl>https://github.com/vipentti/Vipentti.Nuke.Components</PackageProjectUrl>
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/vipentti/Vipentti.Nuke.Components</RepositoryUrl>
